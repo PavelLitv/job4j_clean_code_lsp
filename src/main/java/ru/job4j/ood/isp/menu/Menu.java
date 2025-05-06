@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public interface Menu extends Iterable<Menu.MenuItemInfo> {
-
     String ROOT = null; /* Константа, указывающая, что нужно добавить элемент в корень */
 
     boolean add(String parentName, String childName, ActionDelegate actionDelegate);
@@ -14,10 +13,12 @@ public interface Menu extends Iterable<Menu.MenuItemInfo> {
     Optional<MenuItemInfo> select(String itemName);
 
     class MenuItemInfo {
-
         private final String name;
+
         private final List<String> children;
+
         private final ActionDelegate actionDelegate;
+
         private final String number;
 
         public MenuItemInfo(MenuItem menuItem, String number) {

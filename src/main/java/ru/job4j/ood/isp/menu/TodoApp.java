@@ -3,7 +3,6 @@ package ru.job4j.ood.isp.menu;
 import ru.job4j.ood.isp.menu.actions.*;
 
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * 6. Создайте простенький класс TodoApp. Этот класс будет представлять собой консольное приложение, которое позволяет:
@@ -15,17 +14,19 @@ import java.util.Scanner;
  */
 public class TodoApp {
     private final Output output;
-    private final Menu menu = new SimpleMenu();
 
-    public TodoApp(Output output) {
+    private final Menu menu;
+
+    public TodoApp(Output output, Menu menu) {
         this.output = output;
+        this.menu = menu;
     }
 
     public void run(Input input, List<UserAction> actions) {
         boolean running = true;
         while (running) {
             showMenu(actions);
-            int select = new Scanner(System.in).nextInt();
+            int select = input.askInt("Выберете пункт меню");
             if (select < 0 || select >= actions.size()) {
                 System.out.println("Неверный ввод, вы можете выбрать: 0 ... " + (actions.size() - 1));
                 continue;
@@ -43,9 +44,10 @@ public class TodoApp {
     }
 
     public static void main(String[] args) {
+        Menu menu = new SimpleMenu();
         Output output = new ConsoleOutput();
         Input input = new ConsoleInput();
-        TodoApp app = new TodoApp(output);
+        TodoApp app = new TodoApp(output, menu);
         List<UserAction> actions = List.of(
                 new CreateRootElement(output),
                 new CreateChildElement(output),

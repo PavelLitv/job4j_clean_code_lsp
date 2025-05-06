@@ -24,7 +24,7 @@ public class CreateChildElement implements UserAction {
             output.println(parentName + " - такой элемент меню не найден");
         } else {
             String childName = input.askStr("Введите название дочернего меню: ");
-            menu.add(parentName, childName, () -> System.out.println("Вы вызвали действие меню: " + childName));
+            menu.add(parentName, childName, () -> output.println("Вы вызвали действие меню: " + childName));
         }
         return true;
     }

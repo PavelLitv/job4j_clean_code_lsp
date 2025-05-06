@@ -20,7 +20,7 @@ public class CreateRootElement implements UserAction {
     public boolean execute(Input input, Menu menu) {
         output.println("=== Создание корневого меню ===");
         String name = input.askStr("Введите название меню: ");
-        menu.add(null, name,  () -> System.out.println("Вы вызвали действие меню: " + name));
+        menu.add(null, name,  () -> output.println("Вы вызвали действие меню: " + name));
         return true;
     }
 }

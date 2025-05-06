@@ -3,7 +3,6 @@ package ru.job4j.ood.isp.menu;
 import java.util.*;
 
 public class SimpleMenu implements Menu {
-
     private final List<MenuItem> rootElements = new ArrayList<>();
 
     @Override
@@ -25,7 +24,7 @@ public class SimpleMenu implements Menu {
     public Iterator<MenuItemInfo> iterator() {
         DFSIterator iterator = new DFSIterator();
 
-        return new Iterator<MenuItemInfo>() {
+        return new Iterator<>() {
             @Override
             public boolean hasNext() {
                 return iterator.hasNext();
@@ -53,9 +52,11 @@ public class SimpleMenu implements Menu {
     }
 
     private static class SimpleMenuItem implements MenuItem {
-        private String name;
-        private List<MenuItem> children = new ArrayList<>();
-        private ActionDelegate actionDelegate;
+        private final String name;
+
+        private final List<MenuItem> children = new ArrayList<>();
+
+        private final ActionDelegate actionDelegate;
 
         public SimpleMenuItem(String name, ActionDelegate actionDelegate) {
             this.name = name;
@@ -79,7 +80,6 @@ public class SimpleMenu implements Menu {
     }
 
     private class DFSIterator implements Iterator<ItemInfo> {
-
         private final Deque<MenuItem> stack = new LinkedList<>();
 
         private final Deque<String> numbers = new LinkedList<>();
@@ -116,6 +116,7 @@ public class SimpleMenu implements Menu {
 
     private class ItemInfo {
         private final MenuItem menuItem;
+
         private final String number;
 
         public ItemInfo(MenuItem menuItem, String number) {
